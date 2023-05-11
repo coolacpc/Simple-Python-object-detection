@@ -15,7 +15,7 @@
 ***
 <br>
 Make sure you have OpenCV installed
-
+<br>
 `pip install opencv-python`
 
 Feel free to contribute 😊
