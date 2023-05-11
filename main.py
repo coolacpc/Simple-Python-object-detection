@@ -4,24 +4,15 @@ model_path = cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
 face_cascade = cv2.CascadeClassifier(model_path)
 
 cap = cv2.VideoCapture(0)
-
-
 image_counter = 0
-
-
 capture_mode = False
 
 def capture_image():
     global image_counter
     global capture_mode
 
-
     ret, frame = cap.read()
-
-
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
-
     faces = face_cascade.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=5, minSize=(30, 30))
 
     if capture_mode and len(faces) > 0:
@@ -36,6 +27,7 @@ def capture_image():
 
     for (x, y, w, h) in faces:
         cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+        cv2.putText(frame, 'Face Detected', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
 
     cv2.imshow('Object Detection', frame)
 
@@ -43,11 +35,8 @@ cv2.namedWindow('Object Detection')
 
 while True:
     ret, frame = cap.read()
-
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
     faces = face_cascade.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=5, minSize=(30, 30))
-
     cv2.imshow('Object Detection', frame)
 
     key = cv2.waitKey(1)
